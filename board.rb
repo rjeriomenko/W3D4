@@ -19,7 +19,7 @@ class Board
     self.new(tiles)
   end
 
-  def initialize(grid = self.empty_grid)
+  def initialize(grid = Board.empty_grid)
     @grid = grid
   end
 
@@ -32,6 +32,10 @@ class Board
     x, y = pos
     tile = grid[x][y]
     tile.value = value
+  end
+
+  def rows
+    @grid
   end
 
   def columns
@@ -50,10 +54,10 @@ class Board
     grid.size
   end
 
-  alias_method :rows, :size
+  # alias_method :rows, :size
 
   def solved?
-    rows.all? { |row| solved_set?(row) } &&
+    rows.all? { |row| solved_set?(row) } && # row is 9 and not an array
       columns.all? { |col| solved_set?(col) } &&
       squares.all? { |square| solved_set?(square) }
   end
